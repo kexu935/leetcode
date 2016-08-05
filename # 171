@@ -1,0 +1,41 @@
+// 171. Excel Sheet Column Number
+/*
+Related to question Excel Sheet Column Title
+Given a column title as appear in an Excel sheet, return its corresponding column number.
+For example:
+    A -> 1
+    B -> 2
+    C -> 3
+    ...
+    Z -> 26
+    AA -> 27
+    AB -> 28
+*/
+class Solution {
+public:
+    int titleToNumber(string s) {
+        int colNum = s.back() - 'A' + 1;
+        int base = 26;
+        s.pop_back();
+        while(!s.empty()){
+            colNum += (s.back() - 'A' + 1) * base;
+            base *= 26;
+            s.pop_back();
+        }
+        return colNum;
+    }
+};
+// Alternative method
+class Solution {
+public:
+    int titleToNumber(string s) {
+        int colNum = s.front() - 'A' + 1;
+        s.erase(0,1);
+        while(!s.empty()){
+            colNum *= 26;
+            colNum += s.front() - 'A' + 1;
+            s.erase(0,1);
+        }
+        return colNum;
+    }
+};
