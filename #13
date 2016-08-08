@@ -1,0 +1,34 @@
+// 13. Roman to Integer
+/*
+Given a roman numeral, convert it to an integer.
+Input is guaranteed to be within the range from 1 to 3999.
+*/
+class Solution {
+public:
+    int romanToInt(string s) {
+        int sum = 0;
+        for(int i = 0; i < s.size(); i ++){
+            if( i+1 < s.size()){
+                if( romanCharToInt(s[i]) < romanCharToInt(s[i+1])) 
+                   sum -= romanCharToInt(s[i]);
+                else sum += romanCharToInt(s[i]);
+            }
+            else{
+                sum += romanCharToInt(s[i]);
+            }
+        }
+        return sum;
+    }
+    
+    int romanCharToInt(char c) {
+        int res;
+        if(c == 'I') res = 1;
+        if(c == 'V') res = 5;
+        if(c == 'X') res = 10;
+        if(c == 'L') res = 50;
+        if(c == 'C') res = 100;
+        if(c == 'D') res = 500;
+        if(c == 'M') res = 1000;
+        return res;
+    }
+};
