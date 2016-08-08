@@ -1,0 +1,30 @@
+// 242. Valid Anagram
+/*
+Given two strings s and t, write a function to determine if t is an anagram of s.
+For example,
+s = "anagram", t = "nagaram", return true.
+s = "rat", t = "car", return false.
+Note:
+You may assume the string contains only lowercase alphabets.
+*/
+// solution with 80ms runtime
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+        return s == t;
+    }
+};
+
+// a more efficient solution
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        int counts[26]{0};
+        for(int i = 0; i < s.length(); ++i) counts[s[i]-'a']++;
+        for(int i = 0; i < t.length(); ++i) counts[t[i]-'a']--;
+        for(int i = 0; i < 26; ++i) if(counts[i]) return false;
+        return true;
+    }
+};
